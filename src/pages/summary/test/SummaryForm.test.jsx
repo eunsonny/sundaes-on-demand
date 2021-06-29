@@ -52,11 +52,11 @@ test("popover responds to hover", async () => {
   // getBy는 지정된 텍스트를 찾지못하면 error를 리턴함으로 굳이 toBeIntheDocument 메소드를 쓰지 않아도 테스트가 가능하지만,
   // 가독성면을 생각했을 때 expect(popover).toBeInTheDocument();를 써주는 것이 좋다.
 
-  // popover disappears when we mouse out
+  // popover disappears when we mouse out 
   userEvent.unhover(termsAndConditions);
   // const nullPopoverAgain = screen.queryByText(/no ice cream will actually be delivered/i);
   // expect(nullPopoverAgain).not.toBeInTheDocument();
-  
+
   // 위와 같은 방법으로 테스트 하려고 했지만, error(not wrapped in act (…) warning)가 나타남, 왜나면 테스트가 끝난 후에 react가 element를 update하기 때문 
   // 따라서 화면에 문구가 사라지길 기다린 다음 (async) 테스트 해야 함. 
   // 그 방법이 아래와 같음
