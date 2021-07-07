@@ -17,5 +17,5 @@ export const handlers = [
         { name: 'Hot fudge', imagePath: '/images/hot-fudge.png'},
       ])
     )
-  })
+  }),
 ]
