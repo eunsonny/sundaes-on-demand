@@ -38,7 +38,7 @@ export function OrderDetailsProvider(props) {
   })
 
   useEffect(() => {
-    const scoopsSubtotal = calculateSubtotal("scoops", optionsCounts);
+    const scoopsSubtotal = calculateSubtotal("scoops", optionCounts);
     const toppingSubtotal = calculateSubtotal("topping", optionCounts);
     const grandTotal = scoopsSubtotal + toppingSubtotal;
     setTotals({
