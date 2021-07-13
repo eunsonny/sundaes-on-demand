@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useMemo, useEffect } from "react";
 import { pricePerItem } from "../constants";
 
+// @ts-ignore
 const OrderDetails = createContext();
 
 // create custom hook to check whether we're inside a provider
@@ -66,4 +67,4 @@ export function OrderDetailsProvider(props) {
   return <OrderDetails.Provider value={value} {...props} />
 }
 
-export { OrderDetailsProvider, useOrderDetails }
+// export { OrderDetailsProvider, useOrderDetails }
