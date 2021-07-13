@@ -17,6 +17,15 @@ export function useOrderDetails() {
   return context;
 }
 
+function calculateSubtotal(optionType, optionCounts) {
+  let optionCount = 0;
+  for (const count of optionCounts[optionType].values()) {
+    optionCount += count;
+  }
+
+  return optionCount * pricePerItem[optionType];
+}
+
 export function OrderDetailsProvider(props) {
   const [optionCounts, setOptionCounts] = useState({
     scoops: new Map(),
@@ -27,15 +36,6 @@ export function OrderDetailsProvider(props) {
     toppings: 0,
     grandTotal: 0,
   })
-
-  function calculateSubtotal(orderType, optionCounts) {
-    let optionCount = 0;
-    for (const count of optionCounts[optionsType].values()) {
-      optionCount += count;
-    }
-
-    return optionCount * pricePerItem[optionType];
-  }
 
   useEffect(() => {
     const scoopsSubtotal = calculateSubtotal("scoops", optionsCounts);
@@ -63,6 +63,7 @@ export function OrderDetailsProvider(props) {
     // setter: updateOptionCount
     return [{ ...optionCounts, totals }, updateItemCount];
   }, [optionCounts, totals]);
+
 
   return <OrderDetails.Provider value={value} {...props} />
 }
