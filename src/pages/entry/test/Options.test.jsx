@@ -1,9 +1,12 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../../../test-utils/testing-library-utils";
 import { element } from "prop-types";
+import { OrderDetailsProvider } from "../../../context/OrderDetails";
 
 import Options from "../Options";
 
 test("display image for each scoop option from server", async () => {
+  // render(<Options optionType="scoops" />, { wrapper: OrderDetailsProvider });
+  // 글로벌 하게 wrapper를 설정해 줬으므로, 여기서는 wrapper를 따로 감싸주지 않아도 괜찮음.
   render(<Options optionType="scoops" />);
 
   // find images
@@ -12,7 +15,7 @@ test("display image for each scoop option from server", async () => {
 
   // confirm alt text of images
   const altText = scoopImages.map((element) => element.alt);
-  expect(altText).toEqual(["Chocholate scoop", "Vanilla scoop"]);
+  expect(altText).toEqual(["Chocolate scoop", "Vanilla scoop"]);
 });
 
 test("display image for each topping option from server", async () => {
