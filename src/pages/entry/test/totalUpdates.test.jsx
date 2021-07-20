@@ -1,10 +1,11 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../../../test-utils/testing-library-utils";
 import userEvent from "@testing-library/user-event";
 import Options from "../Options";
 import { OrderDetailsProvider } from '../../../context/OrderDetails';
 
 test("update scoop subtotal when scoop change", async () => {
-  render(<Options optionType="scoops" />, { wrapper: OrderDetailsProvider });
+  // render(<Options optionType="scoops" />, { wrapper: OrderDetailsProvider });
+  render(<Options optionType="scoops" />);
 
   // make sure total starts out $0.00
   const scoopsSubtotal = screen.getByText("Scoops total: $", { exact: false });
@@ -26,3 +27,28 @@ test("update scoop subtotal when scoop change", async () => {
   userEvent.type(chocolateInput, '2');
   expect(scoopsSubtotal).toHaveTextContent('6.00');
 });
+
+test('update toppings subtotal when toppings change', async () => {
+  // render Parent component
+  render(<Options optionType="toppings" />);
+
+  // make sure total starts out at $0.00
+  const toppingTotal = screen.getByText("Toppings total: $", { exact: false });
+  expect(toppingTotal).toHaveTextContent("0.00");
+
+  // add cherries and check subtotal
+  const cherriesCheckbox = await screen.findByRole('checkbox', {
+    name: 'Cherries'
+  });
+  userEvent.click(cherriesCheckbox);
+  expect(toppingTotal).toHaveTextContent('1.50');
+
+  // add hot fudge and check subtotal
+  const hotFudgeCheckbox = screen.getByRole('checkbox', { name : 'Hot fudge'});
+  userEvent.click(hotFudgeCheckbox);
+  expect(toppingTotal).toHaveTextContent('3.00');
+
+  // remove hot fudge and check subtotal
+  userEvent.click(hotFudgeCheckbox);
+  expect(toppingTotal).toHaveTextContent('1.50');
+})
