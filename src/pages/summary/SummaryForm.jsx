@@ -7,6 +7,14 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 export default function SummaryForm() {
   const [tcChecked, setTcChecked] = useState(false);
 
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    // pass along to the next phase
+    // the next page will handle submitting order from context.
+    setOrderPhase('completed');
+  }
+
   const popover = (
     <Popover id="popover-basic">
       <Popover.Content>No ice cream will actually be delivered</Popover.Content>
@@ -23,7 +31,7 @@ export default function SummaryForm() {
   );
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Form.Group controlId="terms-and-conditions">
         <Form.Check
           type="checkbox"
