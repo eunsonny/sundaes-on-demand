@@ -1,5 +1,5 @@
-import { findByRole, render, screen } from "@testing-library/react";
-import { userEvent } from "@testing-library/user-event";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 import App from "../App";
 
@@ -45,7 +45,7 @@ test("order phases for happy path", async () => {
 
   // check summary option items
   expect(screen.getByText("1 Vanilla")).toBeInTheDocument();
-  expect(screen.getByText("2, Chocolate")).toBeInTheDocument();
+  expect(screen.getByText("2 Chocolate")).toBeInTheDocument();
   expect(screen.getByText("Cherries")).toBeInTheDocument();
 
   // alternatively...
@@ -67,6 +67,7 @@ test("order phases for happy path", async () => {
   // confirm order number on confirmation page
   // this one is async because there is a POST request to server in between
   // and confirmation pages
+  
   const thankYouHeader = await screen.findByRole("heading", {
     name: /thank you/i,
   });

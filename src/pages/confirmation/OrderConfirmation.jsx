@@ -6,8 +6,8 @@ import { useOrderDetails } from "../../context/OrderDetails";
 
 
 export default function OrderConfirmation({ setOrderPhase }) {
-  const [, , resetOrder] = useOrderDetails();
-  const [orderNumber, setOrderNumber] = useState(null);
+  const [ , , resetOrder] = useOrderDetails();
+  const [orderNumber, setOrderNumber] = useState('12312313');
   
   useEffect(() => {
     axios
